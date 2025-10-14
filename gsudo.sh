@@ -2,7 +2,7 @@
 # sudo-chwoot.sh
 # CVE-2025-32463 – Sudo EoP Exploit PoC by Rich Mirch
 #                  @ Stratascale Cyber Research Unit (CRU)
-STAGE=$(mktemp -d /tmp/woot)
+STAGE=$(mktemp -d /tmp/sudowoot.stage.XXXXXX)
 cd ${STAGE?} || exit 1
 
 # Section Removed
